@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Oauth login (without the rest client)</title>
+
+<link href="/zf-apigility/css/bootstrap.min.css" media="screen"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/zf-apigility/js/jquery.min.js"></script>
+<script type="text/javascript" src="/zf-apigility/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Oauth login testing</h1>
+
+		<p>There are a few things you care about in the response:
+		<ol>
+			<li><strong>access_token</strong> - The Access token is what you
+				use to connect to the API and make calls.</li>
+			<li><strong>refresh_token</strong> - this is used to generate a
+				new access token when it expires.</li>
+			<li><strong>expires_in</strong> - The number of seconds before
+				the access token expires.</li>
+		</ol>
+		</p>
+
+
+
+		<form id="oauth-password-grant-login" class="form-horizontal">
+			<fieldset>
+
+				<!-- Form Name -->
+				<legend>Form Name</legend>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="username">Email</label>
+					<div class="col-md-5">
+						<input id="username" name="username" type="text"
+							placeholder="you@somecompany.com" class="form-control input-md"
+							required=""> <span class="help-block">typically an
+							e-mail address</span>
+					</div>
+				</div>
+
+				<!-- Password input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="password">Password</label>
+					<div class="col-md-5">
+						<input id="password" name="password" type="password"
+							placeholder="password" class="form-control input-md" required="">
+						<span class="help-block">Something secure of course!</span>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="login">Get Oauth
+						Access Token</label>
+					<div class="col-md-4">
+						<button id="login" name="login" class="btn btn-primary">Sign
+							In</button>
+					</div>
+				</div>
+
+				<input type="hidden" name="client_id" value="testing" /> <input
+					type="hidden" name="grant_type" value="password" />
+
+			</fieldset>
+		</form>
+
+		<p>Response data</p>
+		<pre>
+		<div class="response_data">NULL so far...</div>
+	</pre>
+
+		<p>
+			<strong>Console</strong>
+		</p>
+		<pre>
+		<div class="console">No erorrs..</div>
+	</pre>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('#oauth-password-grant-login').submit(function(e) {
+
+				console.log('clicked submit');
+				e.preventDefault();
+
+				var fd = new FormData(jQuery(this)[0]);
+				console.log(fd);
+
+				jQuery.ajax({
+
+					url : '/oauth',
+					type : 'POST',
+					contentType : false,
+					data : fd,
+					processData : false,
+					error : function(data) {
+						jQuery('div.console').html(JSON.stringify(data));
+					},
+					success : function(data) {
+						jQuery('div.response_data').html(JSON.stringify(data));
+					}
+				});
+				e.preventDefault();
+
+			});
+		});
+	</script>
+
+
+
+</body>
+</html>

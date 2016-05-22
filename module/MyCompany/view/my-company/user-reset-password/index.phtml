@@ -1,0 +1,131 @@
+<html>
+<head>
+<link href="/zf-apigility/css/bootstrap.min.css" media="screen"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/zf-apigility/js/jquery.min.js"></script>
+<script type="text/javascript" src="/zf-apigility/js/bootstrap.min.js"></script>
+<title>MyCompany - Password Reset</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		var requestData = <?php echo json_encode($this->requestParams);?>;
+
+		jQuery(document).ready( function () {
+
+jQuery('#reset-password-form input[name="token"]').val(requestData.token);
+jQuery('#reset-password-form input[name="email"]').val(requestData.email);
+			
+			jQuery('#reset-password-form').submit(function(e) {
+				e.preventDefault();
+				var formData = new FormData(jQuery(this)[0]);
+				console.log(formData);
+
+if (jQuery('input[name="newPassword"]').val() !== jQuery('input[name="password2"]').val()) {
+	jQuery('div.console').text('Passwords must match!');
+	jQuery('div.console').removeClass('hidden');
+	return false;
+}
+				
+				jQuery.ajax({
+					url : '/account/finish-password-reset',
+					type : 'POST',
+					contentType : false,
+					data : formData,
+					processData : false,
+					error : function(data) {
+
+
+						if (typeof data.responseText !== 'undefined') {
+
+							var responseJSON = jQuery.parseJSON(data.responseText);
+                            var consoleLog = '';
+
+                            if (typeof responseJSON.validation_messages !== 'undefined') {
+                                for (var i in responseJSON.validation_messages) {
+    	                            consoleLog = consoleLog + '<br />' + i ;
+    
+    	                            for (var n in responseJSON.validation_messages[i]) {
+    		                            consoleLog = consoleLog + " validator: " + n + ' - ' + responseJSON.validation_messages[i][n];
+    	                            }
+                                }
+                            }else{
+								var consoleLog = responseJSON.detail;
+                            }
+                            
+                           
+							jQuery('div.console').html(consoleLog);
+                            
+						}else{
+							var errorMessage = JSON.stringify(data);
+						}
+						
+						jQuery('div.console').removeClass('hidden');
+					},
+					beforeSend: function() {
+						jQuery('div.console').removeClass('hidden');
+						jQuery('div.console').text('Attempting to reset your password.');
+					},
+					success : function(data) {
+						jQuery('div.console').removeClass('hidden');
+						jQuery('div.console').text(JSON.stringify(data));
+						window.location.replace("http://192.168.33.10/log-me-in");
+					}
+				});
+			});
+		});	
+
+
+		</script>
+
+	<div class="container">
+		<div class="row">
+			<div class="console alert alert-warning hidden"></div>
+			<form class="form-horizontal" id="reset-password-form">
+
+				<input type="hidden" name="token" value="" /> <input type="hidden"
+					name="email" value="" />
+				<fieldset>
+					<!-- Form Name -->
+					<legend>Password Reset</legend>
+
+					<!-- Password input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="password1">New Password</label>
+						<div class="col-md-4">
+							<input id="password1" name="newPassword" type="password"
+								placeholder="your super secure password"
+								class="form-control input-md" required=""> <span
+								class="help-block">Must be at least 5 characters long</span>
+						</div>
+					</div>
+
+					<!-- Password input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="password2">New Password
+							(repeat)</label>
+						<div class="col-md-4">
+							<input id="password2" name="password2" type="password"
+								placeholder="your super secure password (again)"
+								class="form-control input-md" required=""> <span
+								class="help-block">same as above!</span>
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="submit"></label>
+						<div class="col-md-4">
+							<button id="submit" name="submit" class="btn btn-primary">Update
+								my password</button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+
+		</div>
+	</div>
+
+</body>
+</html>
