@@ -84,7 +84,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     public function testRegisterUser()
     {
         // TODO Auto-generated UserServiceTest->testRegisterUser()
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
@@ -95,7 +95,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     public function testRegisterUserEmailAreadyExistsException()
     {
         // TODO Auto-generated UserServiceTest->testRegisterUser()
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
@@ -111,7 +111,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
      */
     public function testForgotPassword()
     {
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
@@ -134,14 +134,14 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     {
         
         // TODO Auto-generated UserServiceTest->testRegisterUser()
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
         
         $this->assertInstanceOf(User::class, $userObj);
         
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $newPassword = 'def456';
         $resetToken = hash('sha256', $userObj->getId() . $userObj->getEmail() . $userObj->getPassword() . $userObj->getCreatedAt()->getTimestamp());
         
@@ -155,7 +155,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
      */
     public function testFetchUser()
     {
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
@@ -190,7 +190,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     public function testChangeEmailAddress()
     {
         // TODO Auto-generated UserServiceTest->testRegisterUser()
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
@@ -211,7 +211,7 @@ class UserServiceTest extends PHPUnit_Framework_TestCase
     public function testChangeEmailAddressByAnotherRegularUser()
     {
         // TODO Auto-generated UserServiceTest->testRegisterUser()
-        $emailAddress = "jack.peterson+unit_test@gmail.com";
+        $emailAddress = "you@example.com";
         $password = "abc123";
         
         $userObj = $this->userService->registerUser($emailAddress, $password);
