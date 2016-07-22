@@ -4,8 +4,6 @@ use MyCompany\Factory\UserServiceFactory;
 use MyCompany\Controller\UserResetPasswordController;
 use MyCompany\Entity\User;
 use MyCompany\Authentication\iAuthAwareInterface;
-use ZF\MvcAuth\Identity\AuthenticatedIdentity;
-use ZF\ApiProblem\ApiProblem;
 
 return array(
     'controllers' => array(
@@ -32,29 +30,7 @@ return array(
             UserService::class => UserServiceFactory::class
         ),
         'initializers' => array(
-            'iAuthAwareInterface' => function ($model, $serviceManager) {
-                if ($model instanceof iAuthAwareInterface) {
-                    try {
-                        $authObj = $serviceManager->get('api-identity');
-                        
-                        if ($authObj instanceof AuthenticatedIdentity) {
-                            /**
-                             *
-                             * @var $orm EntityManagerInterface
-                             */
-                            $orm = $serviceManager->get('doctrine.entitymanager.orm_default');
-                            
-                            $oauth_user_id = $serviceManager->get('api-identity')->getAuthenticationIdentity()['user_id'];
-                            
-                            $userObj = $orm->find(User::class, $oauth_user_id);
-                            
-                            $model->setAuthenticatedIdentity($userObj);
-                        }
-                    } catch (\exception $e) {
-                        return new ApiProblem(500, $e->getMessage());
-                    }
-                }
-            }
+            'iAuthAwareInterface' => 'MyCompany\\Initializer\iAuthAwareInitializer'
         )
     ),
     'view_manager' => array(
