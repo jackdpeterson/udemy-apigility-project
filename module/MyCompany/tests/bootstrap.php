@@ -98,7 +98,7 @@ class Bootstrap
             include $vendorPath . '/autoload.php';
         }
         
-        include $zf2Path . '/zend-Loader/src/AutoloaderFactory.php';
+        include $zf2Path . '/zend-loader/src/AutoloaderFactory.php';
         AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
                 'autoregister_zf' => true,
