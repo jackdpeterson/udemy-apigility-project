@@ -6,6 +6,9 @@ use Zend\Mvc\MvcEvent;
 
 class Module
 {
+    public function __construct() {
+        UriFactory::registerScheme('chrome-extension', 'Zend\Uri\Uri');
+    }
 
     public function getConfig()
     {
