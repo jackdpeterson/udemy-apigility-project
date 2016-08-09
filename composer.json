@@ -16,6 +16,7 @@
     "zendframework/zftool" : "dev-master",
     "zendframework/zend-developer-tools" : "dev-master",
     "zfcampus/zf-apigility-admin" : "^1.3.1",
+    "zfcampus/zf-apigility-admin-ui" : "1.2.4",
     "zfcampus/zf-deploy" : "~1.0",
     "zfr/zfr-cors" : "~1.2",
     "zend/zend-studio-development-mode" : "~1.0"
