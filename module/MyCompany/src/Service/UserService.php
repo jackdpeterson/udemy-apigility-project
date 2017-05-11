@@ -7,7 +7,6 @@ use MyCompany\Entity\User;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\View\Model\ViewModel;
 use Zend\Mail\Message;
-use SlmMail\Mail\Transport\HttpTransport;
 use Zend\View\Renderer\RendererInterface;
 use Zend\Crypt\Password\Bcrypt;
 use MyCompany\Authentication\iAuthAwareInterface;

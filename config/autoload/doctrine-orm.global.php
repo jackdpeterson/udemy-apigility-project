@@ -20,7 +20,7 @@ return array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
                 'paths' => array(
-                    __DIR__ . '/../../module/MyCompany/src/MyCompany/Entity'
+                    __DIR__ . '/../../module/MyCompany/src/Entity'
                 )
             ),
             
