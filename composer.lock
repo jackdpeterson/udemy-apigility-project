@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fe7ecc366af2f94b3ce01f182a0374c",
+    "content-hash": "bed840f6dd1c56fbd458d118d6d55ef9",
     "packages": [
         {
             "name": "api-skeletons/zf-oauth2-doctrine",

@@ -1,36 +1,40 @@
 <?php
-namespace MyCompany\Factory;
+
+namespace MyCompanyTest\Factory;
 
 use Interop\Container\ContainerInterface;
-use Interop\Container\Exception\ContainerException;
-use Zend\ServiceManager\Exception\ServiceNotCreatedException;
-use Zend\ServiceManager\Exception\ServiceNotFoundException;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Mail\Transport\TransportInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use MyCompany\Service\UserService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\TemplateMapResolver;
 use MyCompany\RBAC\ServiceRBAC;
+use Zend\Mail;
 
 class UserServiceFactory implements FactoryInterface
 {
 
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function createService(ContainerInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof ServiceLocatorAwareInterface) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
         $em = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $mailImpl = $serviceLocator->get('SlmMail\Mail\Transport\SesTransport');
-        
+        $mockTransport = new class () implements TransportInterface
+        {
+            public function send(Mail\Message $message)
+            {
+                // uncomment this line if you want to see the contents of the e-mails :-)
+                //echo "sending (via MOCK): \n\n\n" . $message->toString();
+            }
+        };
+
         $mailViewRenderer = new PhpRenderer();
         $resolver = new TemplateMapResolver();
         $resolver->setMap($serviceLocator->get('Config')['view_manager']['template_map']);
         $mailViewRenderer->setResolver($resolver);
-        
+
         $serviceRBAC = new ServiceRBAC();
-        $service = new UserService($em, $mailImpl, $mailViewRenderer, $serviceRBAC);
+        $service = new UserService($em, $mockTransport, $mailViewRenderer, $serviceRBAC);
+
         return $service;
     }
 

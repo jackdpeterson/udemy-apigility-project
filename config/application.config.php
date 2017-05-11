@@ -4,13 +4,13 @@
  *
  * The previous config file has been stored in ./config/application.config.old
  */
-return array(
-    'modules' => include __DIR__  .'/modules.config.php',
-    'module_listener_options' => array(
-        'module_paths' => array(
-            './module',
-            './vendor',
-        ),
+return [
+    'modules' => include __DIR__ . '/modules.config.php',
+    'module_listener_options' => [
+        'module_paths' => [
+            __DIR__ . '/../module',
+            __DIR__ . '/.../vendor',
+        ],
         'config_glob_paths' => [
             realpath(__DIR__) . '/autoload/{,*.}{global,local}.php',
         ],
@@ -18,6 +18,6 @@ return array(
         'config_cache_enabled' => true,
         'module_map_cache_key' => 'application.module.cache',
         'module_map_cache_enabled' => true,
-        'cache_dir' => 'data/cache/',
-    ),
-);
+        'cache_dir' => __DIR__ . '/../data/cache/',
+    ],
+];

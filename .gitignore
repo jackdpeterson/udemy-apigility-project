@@ -16,3 +16,4 @@ data/cache/*
 !data/cache/.gitkeep
 .vagrant
 /config/autoload/aws.global.php
+/test/

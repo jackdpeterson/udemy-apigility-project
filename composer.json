@@ -1,68 +1,76 @@
 {
-  "name" : "mycompanyname/my-api",
-  "description" : "Skeleton Application for Apigility",
-  "require" : {
+  "name": "mycompanyname/my-api",
+  "description": "Skeleton Application for Apigility",
+  "require": {
+    "api-skeletons/zf-oauth2-doctrine": "^1.1",
+    "aws/aws-sdk-php-zf2": "^4.0",
+    "doctrine/doctrine-orm-module": "^1.1",
     "php": "^5.6 || ^7.0",
-    "zendframework/zendframework" : "^3.0",
-    "zfcampus/zf-apigility" : "^1.3",
-    "zfcampus/zf-apigility-documentation" : "^1.2.3",
-    "zfcampus/zf-development-mode" : "^3.0",
-    "doctrine/doctrine-orm-module" : "^1.1",
-    "api-skeletons/zf-oauth2-doctrine" : "^1.1",
-    "slm/mail" : "^2.1.1",
-    "aws/aws-sdk-php-zf2" : "^4.0",
-    "rwoverdijk/assetmanager": "^1.7"
+    "phpunit/phpunit": "^6.0",
+    "rwoverdijk/assetmanager": "^1.7",
+    "slm/mail": "^2.1.1",
+    "zendframework/zendframework": "^3.0",
+    "zfcampus/zf-apigility": "^1.3",
+    "zfcampus/zf-apigility-documentation": "^1.2.3",
+    "zfcampus/zf-development-mode": "^3.0"
   },
-  "require-dev" : {
-    "zendframework/zend-developer-tools" : "^1.1",
-    "zfcampus/zf-apigility-admin" : "^1.5.9",
+  "require-dev": {
+    "zendframework/zend-developer-tools": "^1.1",
+    "zend/zend-studio-development-mode": "~1.0",
+    "zfcampus/zf-apigility-admin": "^1.5.9",
     "zfcampus/zf-composer-autoloading": "^1.0",
-    "zfcampus/zf-deploy" : "^1.2",
-    "zfr/zfr-cors" : "~1.2",
-    "zend/zend-studio-development-mode" : "~1.0"
+    "zfcampus/zf-deploy": "^1.2",
+    "zfr/zfr-cors": "~1.2"
   },
-  "license" : "BSD-3-Clause",
-  "keywords" : [ "api", "apigility", "framework", "zf2" ],
-  "extra" : {
-    "branch-alias" : {
-      "dev-master" : "1.4-dev",
-      "dev-develop" : "1.5-dev"
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "api",
+    "apigility",
+    "framework",
+    "zf2"
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.4-dev",
+      "dev-develop": "1.5-dev"
     }
   },
-  "suggest" : {
-    "zfcampus/zf-apigility-doctrine" : "zfcampus/zf-apigility-doctrine ~1.0 to create Doctrine-Connected REST services",
-    "zfcampus/zf-http-cache" : "zfcampus/zf-http-cache ~1.0 to add HTTP caching to your API"
+  "suggest": {
+    "zfcampus/zf-apigility-doctrine": "zfcampus/zf-apigility-doctrine ~1.0 to create Doctrine-Connected REST services",
+    "zfcampus/zf-http-cache": "zfcampus/zf-http-cache ~1.0 to add HTTP caching to your API"
   },
   "autoload": {
-        "psr-4": {
-            "Application\\": "module/Application/src/"
-        }
+    "psr-4": {
+      "Application\\": "module/Application/src/",
+      "MyCompany\\": "module/MyCompany/src/"
+    }
   },
   "autoload-dev": {
-        "psr-4": {
-            "ApplicationTest\\": "module/Application/test/"
-        },
-        "files": [
-            "src/Apigility/constants.php"
-        ]
+    "psr-4": {
+      "ApplicationTest\\": "module/Application/test/",
+      "MyCompanyTest\\": "module/MyCompany/test/"
+    },
+    "files": [
+      "src/Apigility/constants.php"
+    ]
   },
-  "type" : "library",
-  "support" : {
-    "email" : "apigility-users@zend.com",
-    "irc" : "irc://irc.freenode.net/apigility",
-    "source" : "https://github.com/zfcampus/zf-apigility-skeleton",
-    "issues" : "https://github.com/zfcampus/zf-apigility-skeleton/issues"
+  "type": "library",
+  "support": {
+    "email": "apigility-users@zend.com",
+    "irc": "irc://irc.freenode.net/apigility",
+    "source": "https://github.com/zfcampus/zf-apigility-skeleton",
+    "issues": "https://github.com/zfcampus/zf-apigility-skeleton/issues"
   },
-  "config" : {
-    "process-timeout" : 5000
+  "config": {
+    "process-timeout": 5000
   },
   "scripts": {
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
-        "development-disable": "zf-development-mode disable",
-        "development-enable": "zf-development-mode enable",
-        "development-status": "zf-development-mode status",
-        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
-        "test": "phpunit"
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "development-disable": "zf-development-mode disable",
+    "development-enable": "zf-development-mode enable",
+    "development-status": "zf-development-mode status",
+    "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
+    "test": "phpdbg -qrr vendor/bin/phpunit"
   }
 }
