@@ -1,6 +1,10 @@
 <?php
 namespace MyCompany\Factory;
 
+use Interop\Container\ContainerInterface;
+use Interop\Container\Exception\ContainerException;
+use Zend\ServiceManager\Exception\ServiceNotCreatedException;
+use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyCompany\Service\UserService;
@@ -29,4 +33,11 @@ class UserServiceFactory implements FactoryInterface
         $service = new UserService($em, $mailImpl, $mailViewRenderer, $serviceRBAC);
         return $service;
     }
+
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        return $this->createService($container);
+    }
+
+
 }
