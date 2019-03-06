@@ -6,9 +6,9 @@ return array(
             'orm_default' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                 'params' => array(
-                    'host' => 'localhost',
+                    'host' => 'mysql-db',
                     'port' => '3306',
-                    'user' => 'apigility',
+                    'user' => 'root',
                     'password' => 'apigility',
                     'dbname' => 'apigility'
                 )
