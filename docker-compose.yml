@@ -1,8 +1,27 @@
-dev:
-  build: .
-  dockerfile: Dockerfile-dev
-  ports:
-   - "8080:80"
-  volumes:
-   - .:/var/www
+version: '3'
+services:
+  web:
+    build:
+      context: .
+    depends_on:
+      - mysql-db
+    environment:
+      SKIP_ENV_INTERPOLATION: 1
+    ports:
+      - "80:80"
+    volumes:
+      - ".:/var/www/html"
+  mysql-db:
+    build:
+      context: .docker/mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: apigility
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "33060:3306"
+    volumes:
+      - "dbdata:/var/lib/mysql"
+volumes:
+  dbdata:
     
